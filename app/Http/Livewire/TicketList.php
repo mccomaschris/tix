@@ -77,11 +77,11 @@ class TicketList extends Component
 
         $this->uploaded = true;
 
-        // $this->reset();
+    }
 
-        // $this->emit('refreshTransactions');
-
-        // $this->notify('Imported '.$importCount.' transactions!');
+    public function resetAll()
+    {
+        $this->reset();
     }
 
     public function exportSelected()
@@ -95,6 +95,8 @@ class TicketList extends Component
                 $output .= "\"" . $entry->customer_id . "\",\"" . $entry->points . "\"\r\n";
             }
         }
+
+        $this->reset();
 
         return response()->streamDownload(function () use ($output) {
             echo $output;

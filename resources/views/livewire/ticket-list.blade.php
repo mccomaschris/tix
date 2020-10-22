@@ -20,8 +20,8 @@
     @else
         <div class="py-12 flex flex-col items-center justify-center ">
             <div class="flex items-center space-x-2 text-xl">
-
                 <span wire:click="exportSelected" class="px-2 py-3 rounded text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 border-indigo-600">Download</span>
+                <span wire:click="resetAll" class="text-indigo-600 underline">Reset</span>
             </div>
         </div>
     @endunless
