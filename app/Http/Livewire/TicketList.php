@@ -33,42 +33,29 @@ class TicketList extends Component
         Customer::truncate();
 
         $file = fopen($this->upload->getRealPath(), "r");
+        $rank = 0;
 
         while ( ( $data = fgetcsv($file)) !== FALSE)
         {
             if (trim($data[1]) !== 'CustPri' ) {
 
+                $rank++;
                 $customer = trim($data[0]);
                 $points = trim($data[1]);
                 $points = str_replace(',', '', $points);
                 $points = floatval($points);
 
-                if ($points >= 5000) {
-                    $weight = 10;
-                } elseif ($points <= 4999 || $points >= 4000) {
-                    $weight = 9;
-                } elseif ($points <= 3999 || $points >= 3000) {
-                    $weight = 8;
-                } elseif ($points <= 2999 || $points >= 2500) {
-                    $weight = 7;
-                } elseif ($points <= 2499 || $points >= 2000) {
-                    $weight = 6;
-                } elseif ($points <= 1999 || $points >= 1500) {
-                    $weight = 5;
-                } elseif ($points <= 1499 || $points >= 1000) {
-                    $weight = 4;
-                } elseif ($points <= 999 || $points >= 500) {
-                    $weight = 3;
-                } elseif ($points <= 499 || $points >= 250) {
-                    $weight = 2;
-                } elseif ($points <= 249 || $points >= 0) {
+                if ($points <= 100) {
                     $weight = 1;
+                } else {
+                    $weight = round($points) / 100;
                 }
 
                 for ($x = 0; $x <= $weight; $x++) {
                     Customer::create([
                         'customer_id' => $customer,
                         'points' => $points,
+                        'rank' => $rank,
                     ]);
                 }
             }
@@ -92,7 +79,7 @@ class TicketList extends Component
         foreach ($entries as $entry) {
             if (!in_array($entry->customer_id, $this->outputList)) {
                 array_push($this->outputList, $entry->customer_id);
-                $output .= "\"" . $entry->customer_id . "\",\"" . $entry->points . "\"\r\n";
+                $output .= "\"" . $entry->customer_id . "\",\"" . $entry->points . "\",\"" . $entry->rank . "\"\r\n";
             }
         }
 

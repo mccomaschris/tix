@@ -18,6 +18,9 @@ class CreateCustomersTable extends Migration
             $table->string('customer_id');
             $table->float('points', 12, 4);
             $table->integer('weight')->nullable();
+            $table->string('name')->nullable();
+            $table->integer('tickets_alloted')->nullable();
+            $table->integer('rank');
             $table->timestamps();
         });
     }
