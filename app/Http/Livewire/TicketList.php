@@ -76,6 +76,8 @@ class TicketList extends Component
         $entries = Customer::inRandomOrder()->get();
         $output = "";
 
+        $output = "CustomerNumber,CustPri,Rank\r\n";
+
         foreach ($entries as $entry) {
             if (!in_array($entry->customer_id, $this->outputList)) {
                 array_push($this->outputList, $entry->customer_id);
