@@ -73,26 +73,23 @@ class TicketList extends Component
                 } else if ($af20 >= 1000 && $af20 <= 1499) {
                     $afBalls = 5;
                 } else if ($af20 >= 1500 && $af20 <= 4999) {
-                    $afBalls = 10;
+                    $afBalls = 25;
                 } else if ($af20 >= 5000 && $af20 <= 9999) {
-                    $afBalls = 30;
-                } else if ($af20 >= 10000) {
                     $afBalls = 50;
+                } else if ($af20 >= 10000) {
+                    $afBalls = 75;
                 } else {
                     $afBalls = 0;
                 }
 
                 // Calculate HAF Balls
                 // $hafBalls
-                // $2,500 – 5 entries
-                // $5,000 – 10 entries
-                // $10,000 – 25 entries
-                if ($haf >= 2500 && $haf <= 4999) {
-                    $hafBalls = 5;
-                } else if ($haf >= 5000 && $haf <= 9999) {
+                if ($haf >= 1 && $haf <= 2500) {
                     $hafBalls = 10;
-                } else if ($haf >= 5000) {
-                    $hafBalls = 25;
+                } else if ($haf >= 2501 && $haf <= 5000) {
+                    $hafBalls = 20;
+                } else if ($haf >= 5001) {
+                    $hafBalls = 30;
                 } else {
                     $hafBalls = 0;
                 }
@@ -180,6 +177,7 @@ class TicketList extends Component
         foreach ($entries as $entry) {
             if (!in_array($entry->customer_id, $this->outputList)) {
                 array_push($this->outputList, $entry->customer_id);
+                // $output .= "\"" . $entry->customer_id . "\",\"" . $entry->name . "\",\"" . $entry->phone . "\",\"" . $entry->email . "\",\"" . $entry->points . "\",\"" . $entry->annual_fund . "\",\"" . $entry->herd_athletic_fund . "\",\"" . $entry->tip_off_club . "\",\"" . $entry->herd_rises . "\",\"" . $entry->balls . "\"\r\n";
                 $output .= "\"" . $entry->customer_id . "\",\"" . $entry->name . "\",\"" . $entry->phone . "\",\"" . $entry->email . "\",\"" . $entry->points . "\",\"" . $entry->annual_fund . "\",\"" . $entry->herd_athletic_fund . "\",\"" . $entry->tip_off_club . "\",\"" . $entry->herd_rises . "\"\r\n";
             }
         }
