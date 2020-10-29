@@ -58,10 +58,10 @@ class TicketList extends Component
 
                 // Calculate Priority Point Balls
                 // $ppBalls
-                if ($points <= 100) {
+                if ($points <= 50) {
                     $ppBalls = 1;
                 } else {
-                    $ppBalls = round($points) / 100;
+                    $ppBalls = round($points) / 50;
                 }
 
                 // Calculate Annual Fund 2020 Balls
@@ -71,13 +71,13 @@ class TicketList extends Component
                 } else if ($af20 >= 300 && $af20 <= 999) {
                     $afBalls = 2;
                 } else if ($af20 >= 1000 && $af20 <= 1499) {
-                    $afBalls = 3;
-                } else if ($af20 >= 1500 && $af20 <= 4999) {
                     $afBalls = 5;
+                } else if ($af20 >= 1500 && $af20 <= 4999) {
+                    $afBalls = 10;
                 } else if ($af20 >= 5000 && $af20 <= 9999) {
-                    $afBalls = 15;
-                } else if ($af20 >= 10000) {
                     $afBalls = 30;
+                } else if ($af20 >= 10000) {
+                    $afBalls = 50;
                 } else {
                     $afBalls = 0;
                 }
@@ -132,9 +132,9 @@ class TicketList extends Component
                 } else if ($tipoff >= 600 && $tipoff <= 1499) {
                     $tipoffBalls = 3;
                 } else if ($tipoff >= 1500 && $tipoff <= 4999) {
-                    $tipoffBalls = 4;
-                } else if ($tipoff >= 5000) {
                     $tipoffBalls = 5;
+                } else if ($tipoff >= 5000) {
+                    $tipoffBalls = 10;
                 } else {
                     $tipoffBalls = 0;
                 }
@@ -185,6 +185,8 @@ class TicketList extends Component
         }
 
         $this->reset();
+
+        Customer::truncate();
 
         return response()->streamDownload(function () use ($output) {
             echo $output;
