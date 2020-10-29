@@ -175,12 +175,12 @@ class TicketList extends Component
         $entries = Customer::inRandomOrder()->get();
         $output = "";
 
-        $output = "Donor,Name,C Phone,E Phone,Prior,Drv 20 Commit,HAF 19 & 20,RB19 TO usage commit,Usage beginning with HR Commit all drives,Balls\r\n";
+        $output = "Donor,Name,C Phone,E Phone,Prior,Drv 20 Commit,HAF 19 & 20,RB19 TO usage commit,Usage beginning with HR Commit all drives\r\n";
 
         foreach ($entries as $entry) {
             if (!in_array($entry->customer_id, $this->outputList)) {
                 array_push($this->outputList, $entry->customer_id);
-                $output .= "\"" . $entry->customer_id . "\",\"" . $entry->name . "\",\"" . $entry->phone . "\",\"" . $entry->email . "\",\"" . $entry->points . "\",\"" . $entry->annual_fund . "\",\"" . $entry->herd_athletic_fund . "\",\"" . $entry->tip_off_club . "\",\"" . $entry->herd_rises . "\",\"" . $entry->balls . "\"\r\n";
+                $output .= "\"" . $entry->customer_id . "\",\"" . $entry->name . "\",\"" . $entry->phone . "\",\"" . $entry->email . "\",\"" . $entry->points . "\",\"" . $entry->annual_fund . "\",\"" . $entry->herd_athletic_fund . "\",\"" . $entry->tip_off_club . "\",\"" . $entry->herd_rises . "\"\r\n";
             }
         }
 
