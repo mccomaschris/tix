@@ -21,9 +21,9 @@ class CreateCustomersTable extends Migration
             $table->string('email')->nullable();
             $table->float('points', 12, 4);
             $table->float('annual_fund', 12, 4);
-            $table->integer('herd_athletic_fund')->default(0);
-            $table->integer('tip_off_club')->default(0);
-            $table->string('herd_rises')->default(0);
+            $table->float('herd_athletic_fund', 12, 4);
+            $table->float('tip_off_club', 12, 4);
+            $table->float('herd_rises', 12, 4);
             $table->integer('tickets_alloted')->nullable();
             $table->integer('rank');
             $table->integer('balls')->default(0);

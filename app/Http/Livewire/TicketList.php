@@ -148,10 +148,10 @@ class TicketList extends Component
                         'phone' => $phone,
                         'email' => $email,
                         'points' => $points,
-                        'annual_fund' => $af20,
+                        'annual_fund' => $af20 ? $af20 : 0,
                         'herd_athletic_fund' => $haf ? $haf : 0,
-                        'herd_rises' => $rises,
-                        'tip_off_club' => $tipoff,
+                        'herd_rises' => $rises ? $rises : 0,
+                        'tip_off_club' => $tipoff ? $tipoff : 0,
                         'balls' => $balls,
                         'rank' => $rank
                     ]);
