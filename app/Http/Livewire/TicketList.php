@@ -16,6 +16,7 @@ class TicketList extends Component
     public $upload;
     public $uploaded = false;
     public $download;
+    public $exclude_ids;
     public $importList = [];
     public $outputList = [];
 
@@ -58,12 +59,12 @@ class TicketList extends Component
 
                 // Calculate Priority Point Balls
                 // $ppBalls
-                if ($points <= 50) {
+                if ($points <= 25) {
                     $ppBalls = 1;
                 // } else if ($points >= 20000) {
-                //     $ppBalls = 250;
+                //     $ppBalls = 225;
                 } else {
-                    $ppBalls = round($points) / 50;
+                    $ppBalls = round($points) / 25;
                 }
 
                 // Calculate Annual Fund 2020 Balls
@@ -171,7 +172,11 @@ class TicketList extends Component
 
     public function exportSelected()
     {
-        $entries = Customer::inRandomOrder()->get();
+
+        $excluded = str_replace(' ', '', $this->exclude_ids);
+        $exclude = explode(',', $excluded);
+
+        $entries = Customer::where('points', '<', 2000)->whereNotIn('customer_id', $exclude)->inRandomOrder()->get();
         $output = "";
 
         $output = "Donor,Name,C Phone,E Phone,Prior,Drv 20 Commit,HAF 19 & 20,RB19 TO usage commit,Usage beginning with HR Commit all drives,Entries\r\n";
