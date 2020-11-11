@@ -172,11 +172,7 @@ class TicketList extends Component
 
     public function exportSelected()
     {
-
-        $excluded = str_replace(' ', '', $this->exclude_ids);
-        $exclude = explode(',', $excluded);
-
-        $entries = Customer::where('points', '<', 2000)->whereNotIn('customer_id', $exclude)->inRandomOrder()->get();
+        $entries = Customer::inRandomOrder()->get();
         $output = "";
 
         $output = "Donor,Name,C Phone,E Phone,Prior,Drv 20 Commit,HAF 19 & 20,RB19 TO usage commit,Usage beginning with HR Commit all drives,Entries\r\n";
