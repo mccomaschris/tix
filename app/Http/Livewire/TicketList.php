@@ -154,7 +154,10 @@ class TicketList extends Component
                         'herd_rises' => $rises ? $rises : 0,
                         'tip_off_club' => $tipoff ? $tipoff : 0,
                         'balls' => $balls,
-                        'rank' => $rank
+                        'rank' => $rank,
+                        'l1_qty' => trim($data[9]),
+                        'l3_qty' => trim($data[10]),
+                        'l4_qty' => trim($data[11]),
                     ]);
                 }
             }
@@ -175,13 +178,12 @@ class TicketList extends Component
         $entries = Customer::inRandomOrder()->get();
         $output = "";
 
-        $output = "Donor,Name,C Phone,E Phone,Prior,Drv 20 Commit,HAF 19 & 20,RB19 TO usage commit,Usage beginning with HR Commit all drives,Entries\r\n";
+        $output = "Donor,Name,C Phone,E Phone,Prior,Drv 20 Commit,HAF 19 & 20,RB19 TO usage commit,Usage beginning with HR Commit all drives,U B20 L1 Qty,U B20 L3 Qty,U B20 L4 Qty,Entries\r\n";
 
         foreach ($entries as $entry) {
             if (!in_array($entry->customer_id, $this->outputList)) {
                 array_push($this->outputList, $entry->customer_id);
-                $output .= "\"" . $entry->customer_id . "\",\"" . $entry->name . "\",\"" . $entry->phone . "\",\"" . $entry->email . "\",\"" . $entry->points . "\",\"" . $entry->annual_fund . "\",\"" . $entry->herd_athletic_fund . "\",\"" . $entry->tip_off_club . "\",\"" . $entry->herd_rises . "\",\"" . $entry->balls . "\"\r\n";
-                // $output .= "\"" . $entry->customer_id . "\",\"" . $entry->name . "\",\"" . $entry->phone . "\",\"" . $entry->email . "\",\"" . $entry->points . "\",\"" . $entry->annual_fund . "\",\"" . $entry->herd_athletic_fund . "\",\"" . $entry->tip_off_club . "\",\"" . $entry->herd_rises . "\"\r\n";
+                $output .= "\"" . $entry->customer_id . "\",\"" . $entry->name . "\",\"" . $entry->phone . "\",\"" . $entry->email . "\",\"" . $entry->points . "\",\"" . $entry->annual_fund . "\",\"" . $entry->herd_athletic_fund . "\",\"" . $entry->tip_off_club . "\",\"" . $entry->herd_rises . "\",\"" . $entry->l1_qty . "\",\"" . $entry->l3_qty . "\",\"" . $entry->l4_qty . "\",\"" . $entry->balls . "\"\r\n";
             }
         }
 

@@ -27,6 +27,9 @@ class CreateCustomersTable extends Migration
             $table->integer('tickets_alloted')->nullable();
             $table->integer('rank');
             $table->integer('balls')->default(0);
+            $table->integer('l1_qty')->default(0);
+            $table->integer('l3_qty')->default(0);
+            $table->integer('l4_qty')->default(0);
             $table->timestamps();
         });
     }
